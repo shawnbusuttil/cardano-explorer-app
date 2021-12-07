@@ -30,6 +30,8 @@ I used `react-query` and a proxy ***which you should switch on*** prior to runni
 - Market data rendering decoupling in isolation. (e.g. if price is available, and volume is down).
 - Translations for my content.
 - Updating market data dynamically through polling and observables.
+- Dynamically updating BTC price.
+- Content coming from CDN.
 
 
 ====================
