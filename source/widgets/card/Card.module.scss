@@ -1,0 +1,25 @@
+.card {
+  padding: 20px;
+  line-height: 1.5;
+  font-weight: 600;
+  font-family: ProximaNova, sans-serif;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--solid-text-color);
+  background-color: var(--card-background-color);
+
+  display: flex;
+  align-items: center;
+
+  .meta {
+    margin-left: 15px;
+
+    .title {
+      font-size: 0.8rem;
+    }
+
+    .content {
+      font-size: 1rem;
+    }
+  }
+}

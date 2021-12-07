@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 import { AppProps } from 'next/app';
 import React from 'react';
 import NoSSR from 'react-no-ssr';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import '../config/mobx.config';
 import ErrorPage from '../features/errors/ErrorPage';
 import { I18nFeatureProvider } from '../features/i18n/ui/I18nFeatureProvider';
@@ -25,6 +26,14 @@ const EmptyStaticLayout = (props: { children: React.ReactNode }) => (
   <>{props.children}</>
 );
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
+
 export default function CardanoExplorer({ Component, pageProps }: AppProps) {
   const { locale, statusCode } = pageProps;
   let PageWithOptionalLayout = Component as PageComponentWithStaticLayout;
@@ -38,27 +47,32 @@ export default function CardanoExplorer({ Component, pageProps }: AppProps) {
     PageWithOptionalLayout.getStaticLayout?.() ?? EmptyStaticLayout;
   // Provide global app features that must survive page navigation:
   return (
-    <I18nFeatureProvider locale={locale}>
-      <GraphQLProvider>
-        <PolymorphThemeProvider>
-          <NetworkInfoFeatureProvider>
-            <NavigationFeatureProvider>
-              <SearchFeatureProvider>
-                <StaticLayout>
-                  <NoSSR
-                    onSSR={
-                      <LoadingSpinner className={styles.loadingSpinnerMargin} />
-                    }
-                  >
-                    <BrowserUpdate />
-                    <Component {...pageProps} />
-                  </NoSSR>
-                </StaticLayout>
-              </SearchFeatureProvider>
-            </NavigationFeatureProvider>
-          </NetworkInfoFeatureProvider>
-        </PolymorphThemeProvider>
-      </GraphQLProvider>
-    </I18nFeatureProvider>
+    <QueryClientProvider client={queryClient}>
+      <I18nFeatureProvider locale={locale}>
+        <GraphQLProvider>
+          <PolymorphThemeProvider>
+            <NetworkInfoFeatureProvider>
+              <NavigationFeatureProvider>
+                <SearchFeatureProvider>
+                  <StaticLayout>
+                    <NoSSR
+                      onSSR={
+                        <LoadingSpinner
+                          className={styles.loadingSpinnerMargin}
+                        />
+                      }
+                    >
+                      <BrowserUpdate />
+
+                      <Component {...pageProps} />
+                    </NoSSR>
+                  </StaticLayout>
+                </SearchFeatureProvider>
+              </NavigationFeatureProvider>
+            </NetworkInfoFeatureProvider>
+          </PolymorphThemeProvider>
+        </GraphQLProvider>
+      </I18nFeatureProvider>
+    </QueryClientProvider>
   );
 }
