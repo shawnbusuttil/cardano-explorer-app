@@ -94,6 +94,7 @@ export const SearchBar = (props: ISearchBarProps) => {
         placeholder={translate('search.placeholder') as string}
         title={translate('search.title') as string}
       />
+
       {isSearchValueValid && (
         <div className={searchContainerStyles}>
           <SearchSuggestions

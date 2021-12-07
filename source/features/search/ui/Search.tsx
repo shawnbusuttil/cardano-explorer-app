@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Button } from 'react-polymorph/lib/components/Button';
 import { Input } from 'react-polymorph/lib/components/Input';
 import { BrandType, SearchType } from '../../../constants';
+import { SPONSORED_LINK } from '../config';
+import { ISponsoredContent } from '../types';
 const DeleteButton = require('../../../public/assets/images/delete.svg');
 import styles from './Search.module.scss';
 
@@ -15,6 +17,7 @@ export interface ISearchProps {
   onInputChange: (value: string) => any;
   onRemoveSearchType?: () => any;
   searchType?: string;
+  sponsoredLink?: ISponsoredContent;
 }
 
 const Search = (props: ISearchProps) => {
@@ -92,6 +95,10 @@ const Search = (props: ISearchProps) => {
           onClick={submitSearch}
         />
       </div>
+      <p className={styles.sponsored}>
+        {SPONSORED_LINK.CONTENT}{' '}
+        <a href={SPONSORED_LINK.LINK}>{SPONSORED_LINK.CTA}</a>
+      </p>
     </div>
   );
 };
