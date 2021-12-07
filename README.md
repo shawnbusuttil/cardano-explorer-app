@@ -1,4 +1,39 @@
-Cardano Explorer App
+### POC: Cardano Explorer App Modification (Price Info)
+
+For my feature, I decided to implement an example/mock of price data coming from CoinMarketCap. This is similar to Ethereum's EthScan blockchain explorer (https://etherscan.io/) as well as Polygon's (https://polygonscan.com/) blockchain explorer of the data that sits under the search bar.
+
+Some important bits you should know before running this:
+
+The `docker-compose` on the `cardano-graphql` project has failed due to the following error:
+
+```
+#9 1.298 W: GPG error: http://archive.ubuntu.com/ubuntu focal-backports InRelease: At least one invalid signature was encountered.
+#9 1.298 E: The repository 'http://archive.ubuntu.com/ubuntu focal-backports InRelease' is not signed.
+------
+executor failed running [/bin/sh -c apt-get update && apt-get install curl -y &&  curl --proto '=https' --tlsv1.2 -sSf -L https://deb.nodesource.com/setup_${NODEJS_MAJOR_VERSION}.x | bash - &&  apt-get install nodejs -y]: exit code: 100
+ERROR: Service 'cardano-graphql' failed to build : Build failed
+```
+
+Which means the GraphQL client on `cardano-explorer` wasn't connecting to localhost:3100 and was failing to load the graphql data needed to render the blockchain transactions. The dev environment was met with an unhandled runtime GraphQL exception.
+
+Due to limited time, I took the decision not to pursue this and instead set a few workarounds in place, such as turning off the primary `jest.config` in the jest setup file in order to run my tests in isolation.
+
+I used `react-query` and a proxy ***which you should switch on*** prior to running `yarn dev`, otherwise you will get CORS errors trying to fetch from the CoinMarketCap API through `localhost`. And as a consequence, all operations in the following step 2 would fail if the proxy is inactive.
+
+1) `yarn proxy`
+2) `yarn dev` | `yarn test` | `yarn storybook`
+
+
+### Possible Improvements:
+
+- Placeholders for loading UI.
+- Market data rendering decoupling in isolation. (e.g. if price is available, and volume is down).
+- Translations for my content.
+- Updating market data dynamically through polling and observables.
+
+
+====================
+
 ====================
 [![Tests](https://github.com/input-output-hk/cardano-explorer-app/workflows/Tests/badge.svg)](https://github.com/input-output-hk/cardano-explorer-app/actions?query=workflow%3ATests)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
