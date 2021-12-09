@@ -10,6 +10,7 @@
     "quotemark": [true, "single", "jsx-double"],
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"],
     "no-var-requires": false,
-    "radix": false
+    "radix": false,
+    "object-literal-sort-keys": false
   }
 }

@@ -11,6 +11,7 @@ import { EpochsFeatureProvider } from '../epochs/ui/EpochsFeatureProvider';
 import { LatestEpochs } from '../epochs/ui/LatestEpochs';
 import { useI18nFeature } from '../i18n/context';
 import { i18nInitialProps } from '../i18n/utils';
+import PriceInfo from '../price-info/ui/PriceInfo';
 import { SearchBar } from '../search/ui/SearchBar';
 const mainNetHeaderImage = require('../../public/assets/images/header/mainnet.png');
 const testNetHeaderImage = require('../../public/assets/images/header/testnet.png');
@@ -44,6 +45,7 @@ const StaticLayout = (props: StaticLayoutProps) => {
       )}
       <Layout>
         <Header brandType={BrandType.ENLARGED} />
+        <PriceInfo />
         <SearchBar brandType={BrandType.ENLARGED} />
         {props.children}
         <Footer rootClassname={styles.footer} />

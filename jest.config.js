@@ -10,9 +10,12 @@ module.exports = {
   ],
   preset: 'ts-jest',
   setupFiles: ['dotenv/config'],
-  setupFilesAfterEnv: ['./source/config/jest.config.ts'],
+  setupFilesAfterEnv: ['./source/features/price-info/tests/config.ts'],
   transform: {
     '\\.graphql$': 'jest-transform-graphql',
     '\\.spec.ts?$': 'ts-jest'
   },
+  moduleNameMapper: {
+    '\\.(css|scss)$': '<rootDir>/styleMock.js',
+  }
 };

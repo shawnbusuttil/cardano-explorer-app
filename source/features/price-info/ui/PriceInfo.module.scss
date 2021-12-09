@@ -1,0 +1,22 @@
+.priceInfo {
+  display: grid;
+  margin-bottom: 20px;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 575px) {
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.error {
+  color: var(--error-color);
+  text-align: center;
+  margin: 20px 0;
+}

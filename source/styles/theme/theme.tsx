@@ -11,6 +11,7 @@ export const reactPolymorphTheme = {
 };
 
 interface IGenerateThemeConfig {
+  cardBgColor: string;
   dottedSeparatorColor: string;
   epochProgressSpinnerBg: string;
   errorColor: string;
@@ -38,6 +39,7 @@ interface IGenerateThemeConfig {
 }
 
 export const generateTheme = (config: IGenerateThemeConfig): CSSProperties => ({
+  ['--card-background-color' as any]: config.cardBgColor,
   ['--dotted-separator-color' as any]: config.dottedSeparatorColor,
   ['--epoch-progress-spinner-color' as any]: config.epochProgressSpinnerBg,
   ['--error-color' as any]: config.errorColor,
@@ -63,6 +65,7 @@ export const generateTheme = (config: IGenerateThemeConfig): CSSProperties => ({
 });
 
 const commonThemeProps = {
+  cardBgColor: 'rgba(255, 255, 255, 0.05)',
   errorPageBottomContainerBgColor: `linear-gradient(
       rgba(18, 19, 38, 0.35),
       rgba(18, 19, 38, 0.65),
